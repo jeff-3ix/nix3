@@ -100,6 +100,32 @@
     usbutils # lsusb
   ];
 
+  dconf.settings = {
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings" = [
+      "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0"
+    ];
+    # ghostty keyboard shortcut
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+      binding = "<Ctrl><Alt>t";
+      command = "ghostty";
+      name = "Open Ghostty";
+    };
+    
+    # ghostty keyboard shortcut using super key
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0" = {
+      binding = "<Super>t";
+      command = "ghostty";
+      name = "Open Ghostty(super)";
+    };
+    
+    # brave keyboard shortcut
+    "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1" = {
+      binding = "<Super>b";
+      command = "brave";
+      name = "Open Brave";
+    };
+  };
+  
   # basic configuration of git, please change to your own
   programs.git = {
     enable = true;
