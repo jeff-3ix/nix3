@@ -1,7 +1,7 @@
 { config, pkgs, ghostty, system, ... }:
 
 {
-   home.username = "jeffu";
+  home.username = "jeffu";
   home.homeDirectory = "/home/jeffu";
 
   home.packages = with pkgs; [
@@ -32,7 +32,7 @@
     yq-go # yaml processor https://github.com/mikefarah/yq
     eza # A modern replacement for ‘ls’
     fzf # A command-line fuzzy finder
-    zoxide
+    #zoxide
     trashy
     tealdeer
     bat
@@ -64,12 +64,6 @@
     gnupg
     fastfetch
     vimgolf
-
-    # nix related
-    #
-    # it provides the command `nom` works just like `nix`
-    # with more details log output
-    nix-output-monitor
 
     # productivity
     hugo # static site generator
@@ -175,11 +169,15 @@
       size = 12;
     };
   };   
-
+  
+  programs.zoxide = {
+    enable = true;
+    enableBashIntegration = true;
+  };
+  
   programs.bash = {
     enable = true;
     enableCompletion = true;
-    # TODO add your custom bashrc here
     bashrcExtra = ''
       export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
     '';
