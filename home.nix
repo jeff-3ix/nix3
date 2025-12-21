@@ -1,4 +1,4 @@
-{ config, pkgs, ghostty, system, ... }:
+{ config, pkgs, system, ... }:
 
 {
   home.username = "jeffu";
@@ -10,7 +10,6 @@
 
     neofetch
     nnn # terminal file manager
-    ghostty.packages.${system}.default
 
     # archives
     zip
@@ -145,23 +144,6 @@
     };
   };
   
-  programs.ghostty = {
-    enable = true;
-    package = ghostty.packages.${system}.default;
-    settings = {
-      background-blur-radius = 20;
-      theme = "dark:Catppuccin Mocha,light:Catppuccin Latte";
-      window-theme = "dark";
-      background-opacity = 0.8;
-      minimum-contrast = 1.1;
-      keybind = [
-        "global:ctrl+`=toggle_quick_terminal"
-        "global:ctrl+shift+n=new_window"
-      ];
-    };
-
-  };
-    
   programs.kitty = {
     enable = true;
     font = {
