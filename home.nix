@@ -35,25 +35,35 @@
     zoxide
     trashy
     tealdeer
+    bat
+    duf
+    just
+    topgrade
 
     # networking tools
-    mtr # A network diagnostic tool
-    iperf3
     dnsutils  # `dig` + `nslookup`
     ldns # replacement of `dig`, it provide the command `drill`
     aria2 # A lightweight multi-protocol & multi-source command-line download utility
     socat # replacement of openbsd-netcat
     nmap # A utility for network discovery and security auditing
     ipcalc  # it is a calculator for the IPv4/v6 addresses
+    speedtest-cli
 
     # misc
     cowsay
+    clolcat
+    kittysay
+    ponysay
+    fortune-kind
+    sl
     file
     which
     tree
     gawk
     zstd
     gnupg
+    fastfetch
+    vimgolf
 
     # nix related
     #
@@ -64,6 +74,19 @@
     # productivity
     hugo # static site generator
     glow # markdown previewer in terminal
+    obsidian
+    libreoffice-fresh
+    tailscale
+    syncthing
+    vscode
+    brave
+    mullvad-browser
+    zoom-us
+    protonmail-desktop
+    protonvpn-gui
+    proton-pass
+    vlc
+    freetube
 
     btop  # replacement of htop/nmon
     bottom
@@ -182,6 +205,10 @@
       update = "sudo nixos-rebuild switch";
       up = "sudo nixos-rebuild switch";
       up-test = "sudo nixos-rebuild test";
+      
+      # git aliases
+      gs = "git status";
+      gc = "git commit -am";
       
     };
   };

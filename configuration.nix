@@ -109,41 +109,14 @@
   wget
   curl
   lynx
-  brave
-  mullvad-browser
-  zoom-us
-  protonmail-desktop
-  protonvpn-gui
-  proton-pass
-  libreoffice-fresh
-  obsidian
-  tailscale
-  syncthing  
-  vscode
-  vlc
-  freetube
+  
   alacritty
   kitty
   ptyxis
-  bottom
-  htop
-  btop
-  bat
-  duf
-  eza
-  zoxide
-  trashy
-  clolcat
-  cowsay
-  kittysay
-  ponysay
-  fortune-kind
-  sl
-  topgrade
-  just
-  vimgolf
+
+ 
   dracula-theme
-  fastfetch  
+    
   ];
 
   environment.variables.EDITOR = "vim";
