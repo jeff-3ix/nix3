@@ -151,7 +151,7 @@
     
     settings = {
       background-opacity = "0.8";
-      font-family = "JetBrainsMono Nerd Font"
+      font-family = "JetBrainsMono Nerd Font";
      
     };
   };
