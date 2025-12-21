@@ -99,7 +99,7 @@
     pciutils # lspci
     usbutils # lsusb
   ];
-
+/*
   dconf.settings = {
     "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings" = [
       "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0"
@@ -127,6 +127,7 @@
       name = "Open Brave";
     };
   };
+  */
   
   # basic configuration of git, please change to your own
   programs.git = {
