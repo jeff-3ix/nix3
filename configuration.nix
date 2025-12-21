@@ -86,7 +86,12 @@
   nixpkgs.config.allowUnfree = true;
   
   nix.settings.experimental-features = [ "nix-command" "flakes"];
-
+  
+  virtualization.podman = {
+    enable = true;
+    dockerCompat = true;
+  };
+  
   environment.systemPackages = with pkgs; [
   git
   vim
@@ -97,6 +102,8 @@
   kitty
   ptyxis
   dracula-theme
+  distrobox
+  boxbuddy
   ];
 
   environment.variables.EDITOR = "vim";
