@@ -152,7 +152,7 @@
     settings = {
       background-opacity = "0.8";
       font-family = "JetBrainsMono Nerd Font"
-      focus-follow-mouse = true;
+      focus-follow-mouse;
       clipboard-read = allow;
       clipboard-write = allow;
       clipboard-trim-trailing-spaces = true;
