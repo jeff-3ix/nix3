@@ -8,7 +8,7 @@
   };
 
   outputs =
-    { nixpkgs, home-manager, ghostty, ... }:
+    { nixpkgs, home-manager, ... }:
     let
       system = "x86_64-linux";
     in
