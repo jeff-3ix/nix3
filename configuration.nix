@@ -87,7 +87,7 @@
   
   nix.settings.experimental-features = [ "nix-command" "flakes"];
   
-  virtualization.podman = {
+  podman = {
     enable = true;
     dockerCompat = true;
   };
