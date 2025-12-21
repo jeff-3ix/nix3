@@ -1,32 +1,9 @@
 { config, pkgs, ghostty, system, ... }:
 
 {
-  # TODO please change the username & home directory to your own
-  home.username = "jeffu";
+   home.username = "jeffu";
   home.homeDirectory = "/home/jeffu";
 
-  # link the configuration file in current directory to the specified location in home directory
-  # home.file.".config/i3/wallpaper.jpg".source = ./wallpaper.jpg;
-
-  # link all files in `./scripts` to `~/.config/i3/scripts`
-  # home.file.".config/i3/scripts" = {
-  #   source = ./scripts;
-  #   recursive = true;   # link recursively
-  #   executable = true;  # make all files executable
-  # };
-
-  # encode the file content in nix configuration file directly
-  # home.file.".xxx".text = ''
-  #     xxx
-  # '';
-
-  # set cursor size and dpi for 4k monitor
-  # xresources.properties = {
-  #  "Xcursor.size" = 16;
-  #  "Xft.dpi" = 172;
-  # };
-
-  # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
     # here is some command line tools I use frequently
     # feel free to add your own or remove some of them
@@ -74,8 +51,6 @@
     file
     which
     tree
-    gnused
-    gnutar
     gawk
     zstd
     gnupg
@@ -91,6 +66,8 @@
     glow # markdown previewer in terminal
 
     btop  # replacement of htop/nmon
+    bottom
+    htop
     iotop # io monitoring
     iftop # network monitoring
 
@@ -186,13 +163,25 @@
 
     # set some aliases, feel free to add more or remove some
     shellAliases = {
-      k = "kubectl";
-      urldecode = "python3 -c 'import sys, urllib.parse as ul; print(ul.unquote_plus(sys.stdin.read()))'";
-      urlencode = "python3 -c 'import sys, urllib.parse as ul; print(ul.quote_plus(sys.stdin.read()))'";
+      # ls and eza aliases (requires eza)
       ls = "eza";
-      ll = "eza -l";
-      la = "eza -a";
+      ll = "eza --long";
+      la = "eza --all";
+      lla = "eza --long --all";
+      lt = "eza --tree";
+      llt = "eza --long --tree";
+      llta = "eza --long --tree --all";
+      
+      # trashy updates (requires trashy)
+      tt = "trash put";
+      tp = "trash put";
+      tl = "trash list";
+      te = "trash empty";
+      
+      # nix update aliases
       update = "sudo nixos-rebuild switch";
+      up = "sudo nixos-rebuild switch";
+      up-test = "sudo nixos-rebuild test";
       
     };
   };
