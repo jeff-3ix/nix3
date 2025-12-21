@@ -151,6 +151,11 @@
     
     settings = {
       background-opacity = "0.8";
+      font-family = "JetBrainsMono Nerd Font"
+      focus-follow-mouse = true;
+      clipboard-read = allow;
+      clipboard-write = allow;
+      clipboard-trim-trailing-spaces = true;
     };
   };
   
