@@ -63,6 +63,11 @@
         pkgs.gutenprint
         pkgs.gutenprintBin
       ];   # Add HP printer drivers
+      listenAddresses = [ "*:631" ];
+      allowFrom = [ "all" ];
+      browsing = true;
+      defaultShared = true;
+      openFirewall = true;
     };
     avahi = {
       enable = true;    # Enable Avahi autodiscovery of printers
