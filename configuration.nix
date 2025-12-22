@@ -82,6 +82,10 @@
       enable = true;        # Enable Tailscale
       useRoutingFeatures = "client";    # allow use of subnet routers/exit nodes. Options are "server", "client", or "both"
     };
+    nextdns = {
+      enable = true;
+      arguments = [ "-config" "8c527c" "-cache-siz" "10MB" ]
+    };
     pulseaudio.enable = false;      # Enable sound with pipewire
     pipewire = {
       enable = true;
@@ -94,6 +98,13 @@
   };
   security.rtkit.enable = true;     # Needed for enabling pipewire
 
+  systemd.services.nextdns-activate = {
+    script = ''
+      /run/current-system/sw/bin/nextdns activate
+    '';
+    after = [ "nextdns.service" ];
+    wantedBy = [ "multi-user.target" ];
+  };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jeffu = {
@@ -151,6 +162,7 @@
   dracula-theme
   distrobox
   boxbuddy
+  nextdns
   #wineWowPackages.stable
   #winetricks
   ];
