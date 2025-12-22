@@ -54,6 +54,12 @@
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
+  # Enable Tailscale
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "client";    # allows use of subnet routers or exit nodes. Options are "server", "client", or "both"
+  };
+  
   # Enable sound with pipewire.
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
