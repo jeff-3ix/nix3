@@ -61,7 +61,6 @@
       useRoutingFeatures = "client";    # allow use of subnet routers/exit nodes. Options are "server", "client", or "both"
     };
     pulseaudio.enable = false;      # Enable sound with pipewire
-    rtkit.enable = true;
     pipewire = {
       enable = true;
       alsa.enable = true;
@@ -71,6 +70,7 @@
     openssh.enable = true;      # Enable the OpenSSH Daemon
     #xserver.libinput.enable = true; # Enable touchpad support (enabled default in most desktopManager).
   };
+  security.rtkit.enable = true;     # Needed for enabling pipewire
 
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
