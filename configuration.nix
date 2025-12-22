@@ -55,7 +55,19 @@
     };
     displayManager.gdm.enable = true;    # Enable the GNOME desktop environment
     desktopManager.gnome.enable = true;    # Enable the GNOME desktop enviorment
-    printing.enable = true;     # Enable CUPS to print documents
+    printing = {
+      enable = true;     # Enable CUPS to print documents
+      drivers = [ pkgs.hplip ];   # Add HP printer drivers
+    };
+    avahi = {
+      enable = true;    # Enable Avahi autodiscovery of printers
+      nssmdns4 = true;
+      openFirewall = true;
+      publish = {
+        enable = true;
+        userServices = true;
+      };
+    };
     tailscale = {
       enable = true;        # Enable Tailscale
       useRoutingFeatures = "client";    # allow use of subnet routers/exit nodes. Options are "server", "client", or "both"
