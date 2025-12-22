@@ -129,8 +129,8 @@
   dracula-theme
   distrobox
   boxbuddy
-  wineWowPackages.stable
-  winetricks
+  #wineWowPackages.stable
+  #winetricks
   ];
 
   environment.variables.EDITOR = "vim";
