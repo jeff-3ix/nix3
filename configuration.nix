@@ -1,6 +1,3 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
 
 { config, pkgs, ... }:
 
@@ -26,7 +23,7 @@
       enable = true;  # enable the firewall
       trustedInterfaces = [ "tailscale0" ];  # always allow traffic from your Tailscale network
       allowedUDPPorts = [ config.services.tailscale.port ]; # allow the Tailscale UDP port through the firewall
-      #wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+      # wireless.enable = true;  # Enables wireless support via wpa_supplicant.
     };
   };
   
@@ -82,10 +79,10 @@
       enable = true;        # Enable Tailscale
       useRoutingFeatures = "client";    # allow use of subnet routers/exit nodes. Options are "server", "client", or "both"
     };
-    nextdns = {
-      enable = true;
-      arguments = [ "-config" "8c527c" "-cache-siz" "10MB" ];
-    };
+    # nextdns = {
+    #   enable = true;
+    #   arguments = [ "-config" "8c527c" "-cache-siz" "10MB" ];
+    # };
     pulseaudio.enable = false;      # Enable sound with pipewire
     pipewire = {
       enable = true;
@@ -94,17 +91,17 @@
       pulse.enable = true;
     };
     openssh.enable = true;      # Enable the OpenSSH Daemon
-    #xserver.libinput.enable = true; # Enable touchpad support (enabled default in most desktopManager).
+    # xserver.libinput.enable = true; # Enable touchpad support (enabled default in most desktopManager).
   };
   security.rtkit.enable = true;     # Needed for enabling pipewire
 
-  systemd.services.nextdns-activate = {
-    script = ''
-      /run/current-system/sw/bin/nextdns activate
-    '';
-    after = [ "nextdns.service" ];
-    wantedBy = [ "multi-user.target" ];
-  };
+  # systemd.services.nextdns-activate = {   # Activates NextDNS after a rebuild
+  #   script = ''
+  #     /run/current-system/sw/bin/nextdns activate
+  #   '';
+  #   after = [ "nextdns.service" ];
+  #   wantedBy = [ "multi-user.target" ];
+  # };
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jeffu = {
@@ -121,7 +118,7 @@
 
   nixpkgs.config = {
     allowUnfree = true;   # Allow unfree packages
-    #allowBroken = true;   # Allow broken packages
+    # allowBroken = true;   # Allow broken packages
   }; 
   
   nix = {
@@ -162,9 +159,9 @@
   dracula-theme
   distrobox
   boxbuddy
-  nextdns
-  #wineWowPackages.stable
-  #winetricks
+  # nextdns
+  # wineWowPackages.stable
+  # winetricks
   ];
 
   environment.variables.EDITOR = "vim";
