@@ -84,7 +84,7 @@
     };
     nextdns = {
       enable = true;
-      arguments = [ "-config" "8c527c" "-cache-siz" "10MB" ]
+      arguments = [ "-config" "8c527c" "-cache-siz" "10MB" ];
     };
     pulseaudio.enable = false;      # Enable sound with pipewire
     pipewire = {
