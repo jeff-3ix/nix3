@@ -11,19 +11,25 @@
     ];
 
   # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    loader.systemd-boot.enable = true;
+    loader.efi.canTouchEfiVariables = true;
+    kernelPackages = pkgs.linuxPackages_latest; # Use latest kernel.
+    initrd.luks.devices."luks-06eeab67-7475-484b-b82b-139750d1d5e0".device = "/dev/disk/by-uuid/06eeab67-7475-484b-b82b-139750d1d5e0";
+  };
 
-  # Use latest kernel.
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-
-  boot.initrd.luks.devices."luks-06eeab67-7475-484b-b82b-139750d1d5e0".device = "/dev/disk/by-uuid/06eeab67-7475-484b-b82b-139750d1d5e0";
-  networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
-
-  # Enable networking
-  networking.networkmanager.enable = true;
-
+  # Networking
+  networking = {
+    hostName = "nixos";     # Define your hostname.
+    networkmanager.enable = true;   # Enable networking
+    firewall = {
+      enable = true;  # enable the firewall
+      trustedInterfaces = [ "tailscale0" ];  # always allow traffic from your Tailscale network
+      allowedUDPPorts = [ config.services.tailscale.port ]; # allow the Tailscale UDP port through the firewall
+      #wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+    };
+  };
+  
   time.timeZone = "America/New_York";
   i18n.defaultLocale = "en_US.UTF-8";
   i18n.extraLocaleSettings = {
@@ -38,42 +44,34 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
-
-  # Enable the GNOME Desktop Environment.
-  services.displayManager.gdm.enable = true;
-  services.desktopManager.gnome.enable = true;
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "us";
-    variant = "";
+  # Services
+  services = {
+    xserver = {
+      enable = true;    # Enable the X11 windowing system
+      xkb = {            # Configure the keymap in X11
+        layout = "us";
+        variant = "";
+      };
+    };
+    displayManager.gdm.enable = true;    # Enable the GNOME desktop environment
+    desktopManager.gnome.enable = true;    # Enable the GNOME desktop enviorment
+    printing.enable = true;     # Enable CUPS to print documents
+    tailscale = {
+      enable = true;        # Enable Tailscale
+      useRoutingFeatures = "client";    # allow use of subnet routers/exit nodes. Options are "server", "client", or "both"
+    };
+    pulseaudio.enable = false;      # Enable sound with pipewire
+    rtkit.enable = true;
+    pipewire = {
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+    };
+    openssh.enable = true;      # Enable the OpenSSH Daemon
+    #xserver.libinput.enable = true; # Enable touchpad support (enabled default in most desktopManager).
   };
 
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable Tailscale
-  services.tailscale = {
-    enable = true;
-    useRoutingFeatures = "client";    # allows use of subnet routers or exit nodes. Options are "server", "client", or "both"
-  };
-  
-  # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-  };
-
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
-  nixpkgs.config.allowBroken = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.jeffu = {
@@ -88,8 +86,10 @@
   # Install firefox.
   programs.firefox.enable = true;
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;   # Allow unfree packages
+    #allowBroken = true;   # Allow broken packages
+  }; 
   
   nix.settings.experimental-features = [ "nix-command" "flakes"];
   
@@ -134,16 +134,6 @@
   #   enableSSHSupport = true;
   # };
 
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  services.openssh.enable = true;
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
