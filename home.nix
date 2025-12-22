@@ -38,6 +38,7 @@
     duf
     just
     topgrade
+    pika-backup
 
     # networking tools
     dnsutils  # `dig` + `nslookup`
@@ -98,6 +99,11 @@
     ethtool
     pciutils # lspci
     usbutils # lsusb
+    
+    # COSMIC stuff
+    cosmic-reader
+    cosmic-edit
+    cosmic-player
   ];
 /*
   dconf.settings = {
