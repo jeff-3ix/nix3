@@ -57,7 +57,12 @@
     desktopManager.gnome.enable = true;    # Enable the GNOME desktop enviorment
     printing = {
       enable = true;     # Enable CUPS to print documents
-      drivers = [ pkgs.hplip ];   # Add HP printer drivers
+      drivers = [ 
+        pkgs.hplip
+        pkgs.hplipWithPlugin
+        pkgs.gutenprint
+        pkgs.gutenprintBin
+      ];   # Add HP printer drivers
     };
     avahi = {
       enable = true;    # Enable Avahi autodiscovery of printers
