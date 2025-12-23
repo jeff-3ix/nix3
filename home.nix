@@ -28,7 +28,7 @@
     yq-go # yaml processor https://github.com/mikefarah/yq
     eza # A modern replacement for ‘ls’
     fzf # A command-line fuzzy finder
-    trashy
+    trash-cli
     tealdeer
     bat
     duf
@@ -190,10 +190,10 @@
       llta = "eza --long --tree --all";
       
       # trashy updates (requires trashy)
-      tt = "trash put";
-      tp = "trash put";
-      tl = "trash list";
-      te = "trash empty";
+      tt = "trash-put";
+      tp = "trash-put";
+      tl = "trash-list";
+      te = "trash-empty";
       
       # nix update aliases
       update = "sudo nixos-rebuild switch";
