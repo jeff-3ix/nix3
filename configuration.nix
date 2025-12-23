@@ -153,8 +153,8 @@
   wget
   curl
   lynx
-  alacritty
-  kitty
+  # alacritty
+  # kitty
   ptyxis
   dracula-theme
   distrobox
