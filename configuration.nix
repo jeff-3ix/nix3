@@ -160,8 +160,8 @@
   distrobox
   boxbuddy
   # nextdns
-  # wineWowPackages.stable
-  # winetricks
+  wineWowPackages.stable
+  winetricks
   ];
 
   environment.variables.EDITOR = "vim";

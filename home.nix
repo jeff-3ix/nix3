@@ -8,7 +8,6 @@
     # here is some command line tools I use frequently
     # feel free to add your own or remove some of them
 
-    neofetch
     nnn # terminal file manager
 
     # archives
@@ -19,8 +18,6 @@
 
     # fonts
     nerd-fonts.fira-code
-    #nerd-fonts.font-logos
-    #nerd-fonts.powerline-extra-symbols
     nerd-fonts.noto
     nerd-fonts.ubuntu
     nerd-fonts.jetbrains-mono
@@ -31,7 +28,6 @@
     yq-go # yaml processor https://github.com/mikefarah/yq
     eza # A modern replacement for ‘ls’
     fzf # A command-line fuzzy finder
-    #zoxide
     trashy
     tealdeer
     bat
@@ -70,6 +66,7 @@
     glow # markdown previewer in terminal
     obsidian
     libreoffice-fresh
+    thunderbird
     tailscale
     syncthing
     vscode
@@ -100,10 +97,6 @@
     pciutils # lspci
     usbutils # lsusb
     
-    # COSMIC stuff
-    cosmic-reader
-    cosmic-edit
-    cosmic-player
   ];
 /*
   dconf.settings = {
@@ -135,7 +128,7 @@
   };
   */
   
-  # basic configuration of git, please change to your own
+  # basic configuration of git
   programs.git = {
     enable = true;
     settings = {
@@ -160,24 +153,6 @@
       # package.disabled = true;
     };
   };
-  # alacritty - a cross-platform, GPU-accelerated terminal emulator
-  programs.alacritty = {
-    enable = true;
-    # custom settings
-    settings = {
-      env.TERM = "xterm-256color";
-      font = {
-        normal = { family = "JetBrains Mono Nerd Font"; style = "Regular"; };
-        bold = { family = "JetBrains Mono Nerd Font"; style = "Bold"; };
-        italic = { family = "JetBrains Mono Nerd Font"; style = "Italic"; };
-        bold_italic = { family = "JetBrains Mono Nerd Font"; style = "Bold Italic"; };
-        size = 12;
-        draw_bold_text_with_bright_colors = true;
-      };
-      scrolling.multiplier = 5;
-      selection.save_to_clipboard = true;
-    };
-  };
   
   programs.ghostty = {
     enable = true;
@@ -190,14 +165,6 @@
      
     };
   };
-  
-  programs.kitty = {
-    enable = true;
-    font = {
-      name = "JetBrainsMono Nerd Font";
-      size = 12;
-    };
-  };   
   
   programs.zoxide = {
     enable = true;
@@ -236,6 +203,8 @@
       # git aliases
       gs = "git status";
       gc = "git commit -am";
+      gpush = "git push";
+      gpull = "git pull";
       
     };
   };
