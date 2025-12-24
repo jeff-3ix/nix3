@@ -49,14 +49,14 @@
         layout = "us";
         variant = "";
       };
-    };
-    displayManager.gdm = {
-      enable = true;    # Enable the GNOME desktop environment
-      autoLogin = {
+      displayManager.gdm = {
         enable = true;
-        user = "jeffu";
-      };
+        autoLogin.enable = true;
+        autoLogin.user = "jeffu";
+      }
+      desktopManager.gnome.enable = true;
     };
+    displayManager.gdm.enable = true;    # Enable the GNOME desktop environment
     desktopManager.gnome.enable = true;    # Enable the GNOME desktop enviorment
     printing = {
       enable = true;     # Enable CUPS to print documents
