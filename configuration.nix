@@ -46,7 +46,7 @@
     xserver = {
       enable = true;    # Enable the X11 windowing system
       autoLogin.enable = true;
-      autoLogin.user = "jeffu"
+      autoLogin.user = "jeffu";
       xkb = {            # Configure the keymap in X11
         layout = "us";
         variant = "";
