@@ -45,19 +45,21 @@
   services = {
     xserver = {
       enable = true;    # Enable the X11 windowing system
+
       xkb = {            # Configure the keymap in X11
         layout = "us";
         variant = "";
       };
+
       displayManager.gdm = {
         enable = true;
         autoLogin.enable = true;
         autoLogin.user = "jeffu";
-      }
+      };
+      
       desktopManager.gnome.enable = true;
     };
-    displayManager.gdm.enable = true;    # Enable the GNOME desktop environment
-    desktopManager.gnome.enable = true;    # Enable the GNOME desktop enviorment
+
     printing = {
       enable = true;     # Enable CUPS to print documents
       drivers = [ 
@@ -72,6 +74,7 @@
       defaultShared = true;
       openFirewall = true;
     };
+
     avahi = {
       enable = true;    # Enable Avahi autodiscovery of printers
       nssmdns4 = true;
@@ -81,14 +84,17 @@
         userServices = true;
       };
     };
+
     tailscale = {
       enable = true;        # Enable Tailscale
       useRoutingFeatures = "client";    # allow use of subnet routers/exit nodes. Options are "server", "client", or "both"
     };
+
     # nextdns = {
     #   enable = true;
     #   arguments = [ "-config" "8c527c" "-cache-siz" "10MB" ];
     # };
+
     pulseaudio.enable = false;      # Enable sound with pipewire
     pipewire = {
       enable = true;
@@ -96,9 +102,11 @@
       alsa.support32Bit = true;
       pulse.enable = true;
     };
+
     openssh.enable = true;      # Enable the OpenSSH Daemon
     # xserver.libinput.enable = true; # Enable touchpad support (enabled default in most desktopManager).
   };
+
   security.rtkit.enable = true;     # Needed for enabling pipewire
 
   # systemd.services.nextdns-activate = {   # Activates NextDNS after a rebuild
