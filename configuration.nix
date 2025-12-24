@@ -45,14 +45,18 @@
   services = {
     xserver = {
       enable = true;    # Enable the X11 windowing system
-      autoLogin.enable = true;
-      autoLogin.user = "jeffu";
       xkb = {            # Configure the keymap in X11
         layout = "us";
         variant = "";
       };
     };
-    displayManager.gdm.enable = true;    # Enable the GNOME desktop environment
+    displayManager.gdm = {
+      enable = true;    # Enable the GNOME desktop environment
+      autoLogin = {
+        enable = true;
+        user = "jeffu";
+      };
+    };
     desktopManager.gnome.enable = true;    # Enable the GNOME desktop enviorment
     printing = {
       enable = true;     # Enable CUPS to print documents
