@@ -78,7 +78,7 @@
     proton-pass
     vlc
     freetube
-    # citrix_workspace
+    citrix_workspace
 
     btop  # replacement of htop/nmon
     bottom
