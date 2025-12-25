@@ -1,0 +1,54 @@
+{ pkgs, ... }:
+
+{
+  home.packages = with pkgs; [
+    nnn
+    zip
+    xz
+    unzip
+    p7zip
+    ripgrep
+    jq
+    yq-go
+    eza
+    fzf
+    trash-cli
+    tealdeer
+    bat
+    duf
+    dnsutils
+    ldns
+    aria2
+    socat
+    nmap
+    ipcalc
+    speedtest-cli
+    cowsay
+    clolcat
+    kittysay
+    ponysay
+    fortune-kind
+    sl
+    file
+    which
+    tree
+    gawk
+    zstd
+    gnupg
+    fastfetch
+    glow
+    btop
+    bottom
+    htop
+    iotop
+    iftop
+    strace
+    ltrace
+    lsof
+    sysstat
+    lm_sensors
+    ethtool
+    pciutils
+    usbutils
+  ];
+}
