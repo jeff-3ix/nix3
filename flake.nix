@@ -17,15 +17,13 @@
         nixos = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
-            ./configuration.nix
+            ./hosts/dell/default.nix
+
             home-manager.nixosModules.home-manager
             {
               home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;          
-              home-manager.users.jeffu = ./home.nix;
-
-              # Optionally, use home-manager.extraSpecialArgs to pass
-              # arguments to home.nix
+              home-manager.useUserPackages = true;
+              home-manager.users.jeffu = import ./home/jeffu/default.nix;
             }
           ];
         };
