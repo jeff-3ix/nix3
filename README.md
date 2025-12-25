@@ -65,7 +65,7 @@ git config --get credential.helper
 ```
 If prompts suddenly reappear, the keyring may not be unlocked (common with auto-login).
 
-### 5. ** Why is `~/.config/git/config` read-only?*
+### 5. ** Why is `~/.config/git/config` read-only?**
 
 Because Home Manager owns it.
 Do *not* use:
