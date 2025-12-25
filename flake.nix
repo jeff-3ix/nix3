@@ -14,7 +14,7 @@
     in
     {
       nixosConfigurations = {
-        nixos = nixpkgs.lib.nixosSystem {
+        dell = nixpkgs.lib.nixosSystem {
           inherit system;
           modules = [
             ./hosts/dell/default.nix
