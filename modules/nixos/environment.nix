@@ -3,14 +3,14 @@
 {
   environment.variables.EDITOR = "vim";
 
+  # Use gitFull so the libsecret credential helper is available
   programs.git.enable = true;
-
-  # Credential storage via Secret Service (GNOME Keyring, etc.)
   environment.systemPackages = [
-    pkgs.git-credential-libsecret
+    pkgs.gitFull
   ];
 
   programs.git.config = {
-    credential.helper = "libsecret";
+    # Tell git where the helper binary lives (gitFull provides it)
+    credential.helper = "${pkgs.gitFull}/libexec/git-core/git-credential-libsecret";
   };
 }
