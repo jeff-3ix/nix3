@@ -222,7 +222,9 @@
       
       # git aliases
       gs = "git status";
-      gc = "git commit -am";
+      gc = "git commit -am"; # git commit with message
+      gck = "git commit --allow-empty -m"; # git commit with message at checkpoint after successful build
+      gl = "git log --oneline"; # show git commit messages, can use with --grep "" or -10 for number of commits
       gpush = "git push";
       gpull = "git pull";
       
