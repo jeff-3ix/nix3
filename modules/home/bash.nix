@@ -26,25 +26,25 @@
       
       # nix update aliases
       # normal rebuild
-      rebuild = "sudo nixos-rebuild switch --flake ~/nixos-config#nixos";
-      nr = "sudo nixos-rebuild switch --flake ~/nixos-config#nixos";
+      rebuild = "sudo nixos-rebuild switch --flake ~/nixos-config#dell";
+      nr = "sudo nixos-rebuild switch --flake ~/nixos-config#dell";
 
       # test only
-      rebuild-test = "sudo nixos-rebuild test --flake ~/nixos-config#nixos";
-      nrt = "sudo nixos-rebuild test --flake ~/nixos-config#nixos";
+      rebuild-test = "sudo nixos-rebuild test --flake ~/nixos-config#dell";
+      nrt = "sudo nixos-rebuild test --flake ~/nixos-config#dell";
 
       # next-boot only
-      rebuild-boot = "sudo nixos-rebuild boot --flake ~/nixos-config#nixos";
-      nrb = "sudo nixos-rebuild boot --flake ~/nixos-config#nixos";  
+      rebuild-boot = "sudo nixos-rebuild boot --flake ~/nixos-config#dell";
+      nrb = "sudo nixos-rebuild boot --flake ~/nixos-config#dell";  
 
       # debugging mode
-      nr-trace = "sudo nixos-rebuild switch --flake ~/nixos-config#nixos --show-trace";
+      nr-trace = "sudo nixos-rebuild switch --flake ~/nixos-config#dell --show-trace";
 
       # clean system generations, then clean user generations, then rebuild
       nr-clean = ''
         sudo nix-collect-garbage -d && 
         nix-collect-garbage -d &&
-        sudo nixos-rebuild switch --flake ~/nixos-config#nixos
+        sudo nixos-rebuild switch --flake ~/nixos-config#dell
       ''; 
 
       # deep clean
@@ -52,12 +52,14 @@
         sudo nix-collect-garbage -d &&
         nix-collect-garbage -d &&
         sudo nix-store --optimise &&
-        sudo nixos-rebuild switch --flake ~/nixos-config#nixos
+        sudo nixos-rebuild switch --flake ~/nixos-config#dell
       ''; 
     
       # git aliases
       gs = "git status";
       gc = "git commit -am";
+      gck = "git commit --allow-empty -m";
+      gl = "git log --oneline";  # can use with '--grep' or '-#' for number of logs
       gpush = "git push";
       gpull = "git pull";
       
