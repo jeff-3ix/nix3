@@ -18,5 +18,6 @@
 
     ../../modules/nixos/environment.nix
     ../../modules/nixos/state-version.nix
+    ../../modules/nixos/services-syncthing.nix
   ];
 }
