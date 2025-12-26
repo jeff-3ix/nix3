@@ -4,41 +4,21 @@
   programs.vim = {
     enable = true;
 
-    # Most "set ..." options belong here
+    # Keep only options that Home Manager's vim module exposes reliably.
     settings = {
-      # fileformat=unix is typically fine to omit (Linux default),
-      # but including it matches your vimrc intent.
-      fileformat = "unix";
-      encoding = "UTF-8";
-
-      compatible = false; # "set nocompatible"
       number = true;
-      linebreak = true;
-      showbreak = "+++";
-      textwidth = 79;
-
-      showmatch = true;
-      visualbell = true;
 
       hlsearch = true;
       incsearch = true;
       ignorecase = true;
       smartcase = true;
 
-      # defaults (your global non-python behavior)
+      expandtab = true;
       tabstop = 2;
       softtabstop = 2;
       shiftwidth = 2;
 
-      autoindent = true;
-      smartindent = true;
-      smarttab = true;
-      expandtab = true;
-      wrap = false; # "set nowrap"
-
-      ruler = true;
-      undolevels = 1000;
-      backspace = "indent,eol,start";
+      textwidth = 79;
 
       mouse = "a";
       cursorline = true;
@@ -48,9 +28,27 @@
       clipboard = "unnamed";
     };
 
-    # Vimscript bits: syntax, mappings, filetype-specific overrides
+    # Everything else goes here as plain vimrc.
     extraConfig = ''
+      set fileformat=unix
+      set encoding=UTF-8
       syntax on
+
+      set nocompatible
+      set linebreak
+      set showbreak=+++
+      set showmatch
+      set visualbell
+
+      " indentation behavior
+      set autoindent
+      set smartindent
+      set smarttab
+
+      set nowrap
+      set ruler
+      set undolevels=1000
+      set backspace=indent,eol,start
 
       " Python: 4-space indent
       augroup ft_python_indent
@@ -58,9 +56,7 @@
         autocmd FileType python setlocal tabstop=4 softtabstop=4 shiftwidth=4
       augroup END
 
-      " quick escape
       inoremap jj <esc>
     '';
   };
 }
-
