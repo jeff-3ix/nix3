@@ -4,7 +4,6 @@
   systemd.user.services.warm-citrix-distrobox = {
     Unit = {
       Description = "Warm up Fedora Distrobox for Citrix";
-      # Works across most DEs that support systemd user sessions
       After = [ "graphical-session.target" ];
       Wants = [ "graphical-session.target" ];
     };
@@ -12,8 +11,15 @@
     Service = {
       Type = "oneshot";
       RemainAfterExit = true;
-      ExecStart = "${pkgs.podman}/bin/podman start fedora";
-      ExecStop = "${pkgs.podman}/bin/podman stop -t 10 fedora";
+
+      # Wait a bit after login so we don't contend with startup
+      ExecStartPre = "${pkgs.coreutils}/bin/sleep 10";
+
+      # Start/warm the distrobox without leaving you inside it
+      ExecStart = "${pkgs.distrobox}/bin/distrobox enter fedora -- ${pkgs.coreutils}/bin/true";
+
+      # Optional: don't hard-fail the session if stop fails
+      ExecStop = "-${pkgs.podman}/bin/podman stop -t 10 fedora";
     };
 
     Install = {
