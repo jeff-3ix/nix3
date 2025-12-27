@@ -76,7 +76,9 @@
 
   # Hardware
   # Enable bluetooth (but prevent systemd and blueman from autostart - see above)
-  # To start bluetooth: 'sudo systemctl start bluetooth'
+  # To start bluetooth: 'sudo bluetoothctl power on && sudo systemctl start bluetooth'
   # To stop bluetooth: 'sudo systemctl stop bluetooth'
-  hardware.bluetooth.enable = true;   
-}
+  hardware.bluetooth = {
+    enable = true;   
+    powerOnBoot = false;
+  };
