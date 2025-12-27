@@ -3,7 +3,7 @@
 {
   home.packages = with pkgs; [
     bash-completion
-    ble.sh
+    blesh
     nnn
     zip
     xz

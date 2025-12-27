@@ -9,7 +9,7 @@
     '';
 
     initExtra = ''
-      source ${pkgs.ble.sh}/share/blesh/ble.sh
+      source ${pkgs.blesh}/share/blesh/ble.sh
 
       # Readline settings (some may be superseded by ble.sh)
       bind 'set completion-ignore-case on'
