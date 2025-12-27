@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, ... }:
 
 {
   # Services
@@ -71,8 +71,11 @@
 
   security.rtkit.enable = true;     # Needed for enabling pipewire
 
-  # Prevent Bluetooth from auto-starting at boot
-  systemd.services.bluetooth.wantedBy = [];
+  # Don't let the bluetooth systemd unit be pulled into boot targets
+  systemd.services.bluetooth.wantedBy = lib.mkForce [];
+
+  # Prevent the kernel driver from probing the device at boot
+  boot.blacklistedKernelModules = [ "btusb" ];
 
   # Hardware
   # Enable bluetooth (but prevent systemd and blueman from autostart - see above)
@@ -82,3 +85,4 @@
     enable = true;   
     powerOnBoot = false;
   };
+}

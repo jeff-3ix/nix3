@@ -4,7 +4,10 @@
   # Networking
   networking = {
     hostName = "nixos";     # Define your hostname.
-    networkmanager.enable = true;   # Enable networking
+    networkmanager = {
+      enable = true;   # Enable networking
+      waitOnline.enable = false;  # system reaches multi-user targets sooner on boot
+    };
     firewall = {
       enable = true;  # enable the firewall
       trustedInterfaces = [ "tailscale0" ];  # always allow traffic from your Tailscale network
