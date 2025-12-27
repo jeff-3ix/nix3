@@ -4,10 +4,13 @@
   imports = [
     ./base.nix
 
+    ./keyring.nix
+
     ./packages-cli.nix
     ./packages-gui.nix
     ./packages-dev.nix
 
+    ./brave.nix
     ./vim.nix
     ./ghostty.nix
     ./zoxide.nix

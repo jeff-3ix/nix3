@@ -21,6 +21,8 @@
       user = "jeffu";
     };
 
+    gnome.gnome-keyring.enable = true;
+    
     openssh.enable = true;      # Enable the OpenSSH Daemon
     # xserver.libinput.enable = true; # Enable touchpad support (enabled default in most desktopManager).
 
@@ -69,7 +71,13 @@
   #   arguments = [ "-config" "8c527c" "-cache-siz" "10MB" ];
   # };
 
-  security.rtkit.enable = true;     # Needed for enabling pipewire
+  security = {
+    rtkit.enable = true;     # Needed for enabling pipewire
+    pam.services = {
+      login.enableGnomeKeyring = true;
+      gdm.enableGnomeKeyring = true;
+    };
+  };
 
   # Don't let the bluetooth systemd unit be pulled into boot targets
   systemd.services.bluetooth.wantedBy = lib.mkForce [];
