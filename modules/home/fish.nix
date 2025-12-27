@@ -85,7 +85,7 @@
       };
 
     };
-
+  };
   
 
   # Replace what you had in bashrcExtra:
