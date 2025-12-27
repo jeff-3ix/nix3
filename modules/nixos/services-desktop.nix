@@ -28,23 +28,20 @@
 
     printing = {
       enable = true;    # Enable CUPS to print documents
-      drivers = [
-        pkgs.hplip
-        pkgs.hplipWithPlugin
-      ];
-      listenAddresses = [ "*:631" ];
-      allowFrom = [ "all" ];
-      browsing = true;
-      defaultShared = true;
-      openFirewall = true;
+      browsed.enable = false;
+      drivers = [ ];
+      listenAddresses = [ "localhost:631" ];
+      allowFrom = [ "localhost" ];
+      browsing = false;
+      defaultShared = false;
+      openFirewall = false;
     };
 
+    ipp-usb.enable = false;
+    
     avahi = {
-      enable = true;  # Enable Avahi autodiscovery of printers
-      nssmdns4 = true;
-      openFirewall = true;
-      publish.enable = true;
-      publish.userServices = true;
+      enable = false;  # Enable Avahi autodiscovery of printers (off bc using CUPS)
+      nssmdns4 = false;
     };
 
     tailscale = {
