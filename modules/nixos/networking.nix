@@ -6,7 +6,6 @@
     hostName = "nixos";     # Define your hostname.
     networkmanager = {
       enable = true;   # Enable networking
-      waitOnline.enable = false;  # system reaches multi-user targets sooner on boot
     };
     firewall = lib.mkIf config.services.tailscale.enable {
       enable = true;  # enable the firewall
@@ -16,7 +15,12 @@
     };
   };
 
-  services = {
-    modemmanager.enable = false; # don't need cellular modem, speed up boot
+  systemd.services = {
+    NetworkManager-wait-online.enable = false;
+    ModemManager = {
+      enable = false;
+      wantedBy = lib.mkForce [ ];
+    };
   };
+ 
 }
