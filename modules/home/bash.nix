@@ -6,15 +6,27 @@
     enableCompletion = true;
     bashrcExtra = ''
       export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
+
+      # fzf keybindings & completion
+      eval "$(fzf --bash)"
     '';
 
     initExtra = ''
+      # Load blesh
       source ${pkgs.blesh}/share/blesh/ble.sh
+
+      # blesh behavior tweaks
+      bleopt complete_auto_menu=1
+      bleopt complete_menu_color=1
+      bleopt history_share=1
 
       # Readline settings (some may be superseded by ble.sh)
       bind 'set completion-ignore-case on'
       bind '"\t":menu-complete'
       bind '"\e[Z":menu-complete-backward'
+      bind 'set show-all-if-ambiguous on'
+      bind 'set completion-query-items 200'
+      bind 'set page-completions on'
     '';
 
     shellAliases = {
