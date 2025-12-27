@@ -2,6 +2,8 @@
 
 {
   home.packages = with pkgs; [
+    bash-completion
+    ble.sh
     nnn
     zip
     xz

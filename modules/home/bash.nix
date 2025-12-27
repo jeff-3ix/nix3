@@ -8,6 +8,15 @@
       export PATH="$PATH:$HOME/bin:$HOME/.local/bin:$HOME/go/bin"
     '';
 
+    initExtra = ''
+      source ${pkgs.ble.sh}/share/blesh/ble.sh
+
+      # Readline settings (some may be superseded by ble.sh)
+      bind 'set completion-ignore-case on'
+      bind '"\t":menu-complete'
+      bind '"\e[Z":menu-complete-backward'
+    '';
+
     shellAliases = {
       # ls and eza aliases (requires eza)
       ls = "eza";
