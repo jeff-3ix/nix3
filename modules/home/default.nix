@@ -11,7 +11,8 @@
     ./vim.nix
     ./ghostty.nix
     ./zoxide.nix
-    ./bash.nix
+    ./fish.nix
+    # ./bash.nix
     ./git.nix
     ./starship.nix
 
