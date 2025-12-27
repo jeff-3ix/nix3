@@ -22,6 +22,8 @@
 
   # Don’t let Syncthing be pulled into boot targets directly
   systemd.services.syncthing.wantedBy = lib.mkForce [ ];
+  systemd.services.syncthing-init.wantedBy = lib.mkForce [ ];
+  systemd.services.syncthing-init.requiredBy = lib.mkForce [ ];
 
   # Start it shortly after boot instead (won’t block graphical.target)
   systemd.services.syncthing-delayed-start = {
