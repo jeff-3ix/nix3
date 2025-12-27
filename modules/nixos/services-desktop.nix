@@ -57,7 +57,7 @@
       enable = true;
       alsa.enable = true;
       alsa.support32Bit = true;
-      pusle.enable = true;
+      pulse.enable = true;
     };
 
     blueman.enable = false;   # Change to true to allow tray & agent on GNOME
