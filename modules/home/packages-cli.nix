@@ -2,8 +2,8 @@
 
 {
   home.packages = with pkgs; [
-    bash-completion
-    blesh
+    # bash-completion
+    # blesh
     nnn
     zip
     xz
