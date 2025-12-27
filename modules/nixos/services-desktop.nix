@@ -29,7 +29,6 @@
       drivers = [
         pkgs.hplip
         pkgs.hplipWithPlugin
-        pkgs.gutenprintpkgs.gutenprintBin
       ];
       listenAddresses = [ "*:631" ];
       allowFrom = [ "all" ];
