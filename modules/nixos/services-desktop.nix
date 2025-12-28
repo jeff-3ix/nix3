@@ -84,6 +84,12 @@
   xdg.portal = {    # Disable the crashing GNOME portal backend
       enable = true;
       extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+      # force the GTK portal backend instead of GNOME's which is crashing
+      config = {
+        common = {
+          default = [ "gtk" ];
+        };
+      };
     };
 
   # Don't let the bluetooth systemd unit be pulled into boot targets
