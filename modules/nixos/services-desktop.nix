@@ -35,6 +35,7 @@
       browsing = false;
       defaultShared = false;
       openFirewall = false;
+      cups-pk-helper.enable = true;   # Needed for GNOME print dialogs to enumerate/manage printers cleanly
     };
 
     ipp-usb.enable = false;
@@ -74,6 +75,7 @@
       login.enableGnomeKeyring = true;
       gdm.enableGnomeKeyring = true;
     };
+    polkit.enable = true;
   };
 
   # Don't let the bluetooth systemd unit be pulled into boot targets
