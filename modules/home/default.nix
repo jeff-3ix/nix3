@@ -21,8 +21,7 @@
 
     ./services/warm-citrix-distrobox.nix
 
-    # Keep your commented-out dconf stanza module.
-    ./dconf-commented.nix
+    ./dconf.nix
   ];
 }
 
