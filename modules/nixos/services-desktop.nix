@@ -86,14 +86,17 @@
 
   # Make both implementations available
   extraPortals = [
-    pkgs.xdg-desktop-portal-gnome
     pkgs.xdg-desktop-portal-gtk
+    pkgs.xdg-desktop-portal-gnome
   ];
 
   # Prefer GTK globally (including printing),
   # but allow GNOME to exist for GNOME-only interfaces
   config = {
     common.default = [ "gtk" "gnome" ];
+    org.freedesktop.portal.Print = {
+      default = [ "gtk" ];
+    };
   };
 };
 
