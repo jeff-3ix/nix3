@@ -2,18 +2,13 @@
 
 {
   environment.systemPackages = with pkgs; [
-    cups
     cups-pk-helper
-    gtk3
-    gtk4
     evince
   ];
 
-  # Services
   services = {
     xserver = {
       enable = true;
-
       xkb = {
         layout = "us";
         variant = "";
@@ -29,7 +24,6 @@
     };
 
     gnome.gnome-keyring.enable = true;
-
     openssh.enable = true;
 
     printing = {
@@ -80,12 +74,10 @@
 
   xdg.portal = {
     enable = true;
-
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
       pkgs.xdg-desktop-portal-gnome
     ];
-
     config = {
       common = {
         default = [ "gtk" "gnome" ];
@@ -94,10 +86,7 @@
     };
   };
 
-  # Don't let the bluetooth systemd unit be pulled into boot targets
   systemd.services.bluetooth.wantedBy = lib.mkForce [];
-
-  # Prevent the kernel driver from probing the device at boot
   boot.blacklistedKernelModules = [ "btusb" ];
 
   hardware.bluetooth = {
