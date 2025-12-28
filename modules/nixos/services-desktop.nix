@@ -81,22 +81,25 @@
     polkit.enable = true;
   };
 
-  xdg.portal = {    # Disable the crashing GNOME portal backend
-      enable = true;
-      extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
-      # force the GTK portal backend instead of GNOME's which is crashing
-      config = {
-        common = {
-          default = [ "gtk" ];
-        };
-      };
-    };
+  xdg.portal = {
+  enable = true;
+
+  # Make both implementations available
+  extraPortals = [
+    pkgs.xdg-desktop-portal-gnome
+    pkgs.xdg-desktop-portal-gtk
+  ];
+
+  # Prefer GTK globally (including printing),
+  # but allow GNOME to exist for GNOME-only interfaces
+  config = {
+    common.default = [ "gtk" "gnome" ];
+  };
+};
+
 
   # Don't let the bluetooth systemd unit be pulled into boot targets
   systemd.services.bluetooth.wantedBy = lib.mkForce [];
-
-  # Explicitly disable GNOME's portal implementation
-  systemd.user.services."xdg-desktop-portal-gnome".enable = false;
 
   # Prevent the kernel driver from probing the device at boot
   boot.blacklistedKernelModules = [ "btusb" ];
