@@ -12,7 +12,7 @@
     thunderbird
     tailscale
     syncthing
-    brave
+#    brave
     mullvad-browser
     zoom-us
     protonmail-desktop
