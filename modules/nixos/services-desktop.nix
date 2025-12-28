@@ -2,7 +2,11 @@
 
 {
   environment.systemPackages = with pkgs; [
+    cups
     cups-pk-helper
+    gtk3
+    gtk4
+    evince
   ];
 
   # Services
