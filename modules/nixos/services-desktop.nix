@@ -16,6 +16,11 @@
       };
     };
 
+    xdg.portal = {    # Disable the crashing GNOME portal backend
+      enable = true;
+      extraPortals = [ ];
+    };
+
     desktopManager.gnome.enable = true;
 
     displayManager.gdm.enable = true;
@@ -83,6 +88,9 @@
 
   # Don't let the bluetooth systemd unit be pulled into boot targets
   systemd.services.bluetooth.wantedBy = lib.mkForce [];
+
+  # Explicitly disable GNOME's portal implementation
+  systemd.user.services.xdg-desktop-portal-gnome.enable = false;
 
   # Prevent the kernel driver from probing the device at boot
   boot.blacklistedKernelModules = [ "btusb" ];
