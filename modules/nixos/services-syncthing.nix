@@ -10,7 +10,7 @@
     dataDir = "/home/jeffu/.config/syncthing";
     configDir = "/home/jeffu/.config/syncthing";
 
-    openDefaultPorts = false;
+    openDefaultPorts = true;
 
     settings = {
       gui = {

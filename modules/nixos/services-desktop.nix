@@ -1,6 +1,10 @@
 { pkgs, lib, ... }:
 
 {
+  environment.systemPackages = with pkgs; [
+    cups-pk-helper
+  ];
+
   # Services
   services = {
     xserver = {
@@ -35,7 +39,6 @@
       browsing = false;
       defaultShared = false;
       openFirewall = false;
-      cups-pk-helper.enable = true;   # Needed for GNOME print dialogs to enumerate/manage printers cleanly
     };
 
     ipp-usb.enable = false;
