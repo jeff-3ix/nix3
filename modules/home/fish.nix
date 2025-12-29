@@ -68,6 +68,9 @@ in
       # rollback / generations
       nrl = "nrl";
       nrr = "nrr";
+
+      # find IP (with location)
+      myip = "curl ipinfo.io";
     };
 
 
