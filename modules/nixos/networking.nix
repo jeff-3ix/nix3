@@ -3,7 +3,7 @@
 {
   # Networking
   networking = {
-    hostName = "nixos";     # Define your hostname.
+    hostName = "dell";     # Define your hostname.
     networkmanager = {
       enable = true;   # Enable networking
     };
