@@ -1,4 +1,4 @@
-{ pkgs, lib, ... }:
+{ pkgs, pkgsStable, lib, ... }:
 
 {
   environment.systemPackages = with pkgs; [
@@ -47,6 +47,8 @@
     tailscale = {
       enable = true;
       useRoutingFeatures = "client";
+
+      package = pkgsStable.tailscale;
     };
 
     pulseaudio.enable = false;

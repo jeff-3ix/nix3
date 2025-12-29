@@ -1,8 +1,10 @@
-{ config, pkgs, lib, ... }:
+{ config, pkgsStable, lib, ... }:
 
 {
   services.syncthing = {
     enable = true;
+
+    package = pkgsStable.syncthing;
 
     user = "jeffu";
     group = "users";
