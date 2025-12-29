@@ -1,16 +1,17 @@
 { pkgs, ... }:
 
+let 
+  # Need to change if ever moving repo #
+  nixosConfigDir = "$HOME/nixos-config";
+in
 {
   programs.fish = {
     enable = true;
 
-    # Optional but very useful: make PATH changes apply everywhere
-    # (not just in interactive fish)
-    # We'll actually put this in home.sessionPath below, not here.
-
+    # Aliases: stable behavior changes (don't edit after expansion)
     shellAliases = {
-      # simple aliases go here
-      # ls and eza aliases (requires eza)
+      
+      # eza replaces ls-family aliases (requires eza)
       ls = "eza";
       ll = "eza --long";
       la = "eza --all";
@@ -18,72 +19,197 @@
       lt = "eza --tree";
       llt = "eza --long --tree";
       llta = "eza --long --tree --all";
+    };
 
+    # Abbreviations: shortcuts that expand in CLI
+    shellAbbrs = {
+      
       # trash-cli (requires trash-cli)
       tt = "trash-put";
       tp = "trash-put";
       tl = "trash-list";
       te = "trash-empty";
 
-      # git aliases (gc is below as a function)
+      # git
+      g = "git";
       gs = "git status";
-      gck = "git commit --allow-empty -m";
       gl = "git log --oneline";
-      gpush = "git push";
       gpull = "git pull";
+      gpush = "git push";
+      gck = "git commit --allow-empty -m";  # still type commit message
 
-      # nix update aliases
-      # normal rebuild
-      rebuild = "sudo nixos-rebuild switch --flake ~/nixos-config#dell";
-      nr = "sudo nixos-rebuild switch --flake ~/nixos-config#dell";
+      # nix navigation / info
+      nc = "cd ${nixosConfigDir}";
+      nf = "nix flake";
+      nfu = "nix flake update";
+      nfm = "nix flake metadata";
 
-      # test only
-      rebuild-test = "sudo nixos-rebuild test --flake ~/nixos-config#dell";
-      nrt = "sudo nixos-rebuild test --flake ~/nixos-config#dell";
+      # rebuild entrypoints (functions below)
+      # --- rebuilds using CURRENT flake.lock (no updates) ---
+      nr = "nr";  # switch (no update)
+      nrt = "nrt";  # test (no update)
+      nrb = "nrb";  # boot (no update)
+      nrd = "nrd";  # dry-run (no update)
+      nrtrace = "nrtrace";
 
-      # next-boot only
-      rebuild-boot = "sudo nixos-rebuild boot --flake ~/nixos-config#dell";
-      nrb = "sudo nixos-rebuild boot --flake ~/nixos-config#dell";
+      # update + rebuild (functions below)
 
-      # debugging mode
-      rebuild-trace = "sudo nixos-rebuild switch --flake ~/nixos-config#dell --show-trace";
-      nr-trace = "sudo nixos-rebuild switch --flake ~/nixos-config#dell --show-trace";
+      # --- update pinned inputs, then rebuild ---
+      # Most common “weekly update”: update nixpkgs only (keeps other inputs stable)
+      nru = "nru";  # update nixpkgs then switch
+
+      # “Tinker mode”: update everything
+      nrua = "nrua";  # update all inputs then switch
+
+      # cleanup flows (functions below)
+      nrclean = "nrclean";
+      nrnuke = "nrnuke";
+
+      # rollback / generations
+      nrl = "nrl";
+      nrr = "nrr";
     };
 
-    functions = {
-      # multi-line things go here
 
-      # clean system generations, then clean user generations, then rebuild
-      nr-clean = {
+    functions = {
+      # --- internal helpers ---
+
+      __nixos_cd_or_fail = {
         body = ''
-          sudo nix-collect-garbage -d
-          nix-collect-garbage -d
-          sudo nixos-rebuild switch --flake ~/nixos-config#dell
+          if not test -d ${nixosConfigDir}
+            echo "Missing ${nixosConfigDir}" >&2
+            return 1
+          end
+          cd ${nixosConfigDir}
         '';
       };
 
-      # deep clean
-      nr-nuke = {
+      __nixos_target = {
+        body = ''
+          # Hostname-based target avoids hardcoding #dell in every command.
+          set -l host (hostname | string trim)
+          echo "${nixosConfigDir}#$host"
+        '';
+      };
+
+
+      # --- rebuilds using CURRENT flake.lock (no updates) ---
+
+      nr = {
+        description = "nixos-rebuild switch using current flake.lock";
+        body = ''
+          __nixos_cd_or_fail; or return
+          set -l target (__nixos_target)
+          sudo nixos-rebuild switch --flake "$target" $argv
+        '';
+      };
+
+      nrt = {
+        description = "nixos-rebuild test using current flake.lock";
+        body = ''
+          __nixos_cd_or_fail; or return
+          set -l target (__nixos_target)
+          sudo nixos-rebuild test --flake "$target" $argv
+        '';
+      };
+
+      nrb = {
+        description = "nixos-rebuild boot using current flake.lock";
+        body = ''
+          __nixos_cd_or_fail; or return
+          set -l target (__nixos_target)
+          sudo nixos-rebuild boot --flake "$target" $argv
+        '';
+      };
+
+      nrd = {
+        description = "nixos-rebuild dry-run using current flake.lock";
+        body = ''
+          __nixos_cd_or_fail; or return
+          set -l target (__nixos_target)
+          sudo nixos-rebuild dry-run --flake "$target" $argv
+        '';
+      };
+
+      nrtrace = {
+        description = "nixos-rebuild switch with --show-trace";
+        body = ''
+          nr --show-trace $argv
+        '';
+      };
+
+      # --- update pinned inputs, then rebuild ---
+
+      # Most common “weekly update”: update nixpkgs only (keeps other inputs stable)
+      nru = {
+        description = "Update nixpkgs input (flake.lock) then switch";
+        body = ''
+          __nixos_cd_or_fail; or return
+          nix flake lock --update-input nixpkgs
+          nr $argv
+        '';
+      };
+
+      # “Tinker mode”: update everything
+      nrua = {
+        description = "Update ALL flake inputs then switch";
+        body = ''
+          __nixos_cd_or_fail; or return
+          nix flake update
+          nr $argv
+        '';
+      };
+
+      # --- cleanup flows ---
+
+      nrclean = {
+        description = "Collect garbage (system + user) then switch";
+        body = ''
+          sudo nix-collect-garbage -d
+          nix-collect-garbage -d
+          nr $argv
+        '';
+      };
+
+      nrnuke = {
+        description = "Deep clean + optimise store then switch";
         body = ''
           sudo nix-collect-garbage -d
           nix-collect-garbage -d
           sudo nix-store --optimise
-          sudo nixos-rebuild switch --flake ~/nixos-config#dell
+          nr $argv
         '';
       };
 
-      # git commit (add and commit, forces a message)
+      # --- generations / rollback helpers ---
+
+      nrl = {
+        description = "List system generations";
+        body = ''
+          nix-env --list-generations --profile /nix/var/nix/profiles/system
+        '';
+      };
+
+      nrr = {
+        description = "Rollback to previous generation";
+        body = ''
+          sudo nixos-rebuild switch --rollback
+        '';
+      };
+
+      # --- your git commit helper (keep as function; it has logic) ---
+
       gc = {
+        description = "git commit -a -m ... (requires a message)";
         body = ''
           if test (count $argv) -eq 0
-            echo "Usage: gc \"commit message\""
+            echo 'Usage: gc "commit message"'
             return 2
           end
 
           git commit -a -m (string join " " -- $argv)
         '';
-      };
-
+      };      
     };
   };
   
