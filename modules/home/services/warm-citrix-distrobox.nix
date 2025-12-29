@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, pkgsStable, ... }:
 
 {
   systemd.user.services.warm-citrix-distrobox = {
@@ -16,10 +16,10 @@
       ExecStartPre = "${pkgs.coreutils}/bin/sleep 10";
 
       # Start/warm the distrobox without leaving you inside it
-      ExecStart = "${pkgs.distrobox}/bin/distrobox enter fedora -- ${pkgs.coreutils}/bin/true";
+      ExecStart = "${pkgsStable.distrobox}/bin/distrobox enter fedora -- ${pkgs.coreutils}/bin/true";
 
       # Optional: don't hard-fail the session if stop fails
-      ExecStop = "-${pkgs.podman}/bin/podman stop -t 10 fedora";
+      ExecStop = "-${pkgsStable.podman}/bin/podman stop -t 10 fedora";
     };
 
     Install = {
