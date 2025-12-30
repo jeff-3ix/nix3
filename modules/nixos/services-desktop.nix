@@ -15,8 +15,8 @@
       };
     };
 
-    desktopManager.gnome.enable = true;
-    displayManager.gdm.enable = true;
+    desktopManager.cosmic.enable = true;
+    displayManager.cosmic-greeter.enable = true;
 
     displayManager.autoLogin = {
       enable = true;
@@ -69,7 +69,6 @@
     rtkit.enable = true;
     pam.services = {
       login.enableGnomeKeyring = true;
-      gdm.enableGnomeKeyring = true;
     };
     polkit.enable = true;
   };
@@ -78,11 +77,10 @@
     enable = true;
     extraPortals = [
       pkgs.xdg-desktop-portal-gtk
-      pkgs.xdg-desktop-portal-gnome
     ];
     config = {
       common = {
-        default = [ "gtk" "gnome" ];
+        default = [ "gtk" ];
         "org.freedesktop.impl.portal.Print" = "gtk";
       };
     };
