@@ -20,5 +20,6 @@
     proton-pass
     vlc
     freetube
+    gimp
   ];
 }

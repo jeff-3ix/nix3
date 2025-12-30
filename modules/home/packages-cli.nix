@@ -52,5 +52,6 @@
     ethtool
     pciutils
     usbutils
+    grim # screenshot tool
   ];
 }
