@@ -65,7 +65,7 @@ git config --get credential.helper
 ```
 If prompts suddenly reappear, the keyring may not be unlocked (common with auto-login).
 
-### 5. ** Why is `~/.config/git/config` read-only?**
+### 5. **Why is `~/.config/git/config` read-only?**
 
 Because Home Manager owns it.
 Do *not* use:
@@ -101,4 +101,8 @@ git branch -vv
 git log --oneline --decorate -5
 ```
 
+### If Brave won’t launch after crash or hostname change
+Remove stale Chromium profile locks:
+
+rm ~/.config/BraveSoftware/Brave-Browser/Singleton*
 
