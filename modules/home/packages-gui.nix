@@ -20,6 +20,6 @@
     proton-pass
     vlc
     freetube
-    citrix_workspace
+#    citrix_workspace
   ];
 }
