@@ -10,6 +10,7 @@
     ./packages-gui.nix
     ./packages-dev.nix
 
+    ./atuin.nix
     ./vim.nix
     ./ghostty.nix
     ./zoxide.nix
