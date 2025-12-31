@@ -7,7 +7,6 @@
     # Shell integration
     enableFishIntegration = true;
     enableBashIntegration = false;
-    enableZshIntegraion = false;
 
     # Optional background daemon for snappier UX
     daemon.enable = true;
