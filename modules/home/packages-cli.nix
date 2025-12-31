@@ -2,14 +2,13 @@
 
 {
   home.packages = with pkgs; [
-    # bash-completion
-    # blesh
     nnn
     zip
     xz
     unzip
     p7zip
     ripgrep
+    chezmoi
     jq
     yq-go
     eza
