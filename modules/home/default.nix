@@ -5,6 +5,7 @@
     ./base.nix
 
     ./keyring.nix
+    ./gpg.nix
 
     ./packages-cli.nix
     ./packages-gui.nix
