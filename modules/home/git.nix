@@ -4,20 +4,20 @@
   programs.git = {
     enable = true;
 
-    userName = "jeff-3ix";
-    userEmail = "jeffryt@pm.me";
-
-    signing = {
-      key = "A84DA197C1543082F3E83D1DF1E1EEDAA53EE303";
-      signByDefault = true;
-    };
-
     settings = {
-      push.autoSetupRemote = true;
-      pull.rebase = true;
+      user.name = "jeff-3ix";
+      user.email = "jeffryt@pm.me";
 
       gpg.format = "openpgp";
       pgp.program = "gpg";
+      
+      push.autoSetupRemote = true;
+      pull.rebase = true;
+    };
+    
+    signing = {
+      key = "A84DA197C1543082F3E83D1DF1E1EEDAA53EE303";
+      signByDefault = true;
     };
   };
 }
