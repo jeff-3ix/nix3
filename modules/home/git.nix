@@ -8,7 +8,7 @@
     userEmail = "jeffryt@pm.me";
 
     signing = {
-      key = "A84DA197C1543082F3E83D1DF1E1EEDAA53EE303"
+      key = "A84DA197C1543082F3E83D1DF1E1EEDAA53EE303";
       signByDefault = true;
     };
 
