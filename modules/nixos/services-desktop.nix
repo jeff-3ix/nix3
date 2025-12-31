@@ -19,7 +19,7 @@
     displayManager.gdm.enable = true;
 
     displayManager.autoLogin = {
-      enable = true;
+      enable = false;   # Auto-login was causing issues w/ keyring
       user = "jeffu";
     };
 
