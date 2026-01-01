@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Usage:
+#   ./bin/nixcat > /tmp/nix-snapshot.txt
+#   ./bin/nixcat modules/home/keyring.nix modules/nixos/networking.nix > /tmp/nix-snapshot.txt
+#
+# Purpose:
+#   Concatenate relevant NixOS config files for sharing/debugging (e.g. with ChatGPT).
+#   Uses git ls-files to avoid secrets and untracked files.
+#
+# Notes:
+# - Only includes tracked files (git ls-files), which helps avoid secrets/untracked junk.
+# - Adds clear file boundary markers for readability.
+
+ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
+cd "$ROOT"
+
+# Core files/paths to always include.
+core=(
+  flake.nix
+  flake.lock
+  hosts/dell/default.nix
+  hosts/dell/hardware-configuration.nix
+  home/jeffu/default.nix
+  modules/home/default.nix
+  modules/nixos
+)
+
+# Extra paths passed on the command line (files or directories).
+extra=( "$@" )
+
+# Build the file list (tracked only).
+git ls-files -z -- "${core[@]}" "${extra[@]}" \
+| tr '\0' '\n' \
+| while IFS= read -r f; do
+    # Skip anything that isn't a regular file (safety)
+    [ -f "$f" ] || continue
+
+    printf "\n===== %s =====\n" "$f"
+
+    # Normalize tabs to spaces to keep formatting stable in chat
+    sed -e 's/\t/  /g' "$f"
+  done
+
