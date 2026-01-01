@@ -24,22 +24,28 @@ core=(
   hosts/dell/hardware-configuration.nix
   home/jeffu/default.nix
   modules/home/default.nix
-  modules/nixos
 )
 
 # Extra paths passed on the command line (files or directories).
 extra=( "$@" )
 
-# Build the file list (tracked only).
-git ls-files -z -- "${core[@]}" "${extra[@]}" \
+emit() {
+  local f="$1"
+  [ -f "$f" ] || return 0
+  printf "\n===== %s =====\n" "$f"
+  sed -e 's/\t/  /g' "$f"
+}
+
+# Core first
+git ls-files -z -- "${core[@]}" \
 | tr '\0' '\n' \
-| while IFS= read -r f; do
-    # Skip anything that isn't a regular file (safety)
-    [ -f "$f" ] || continue
+| while IFS= read -r f; do emit "$f"; done
 
-    printf "\n===== %s =====\n" "$f"
-
-    # Normalize tabs to spaces to keep formatting stable in chat
-    sed -e 's/\t/  /g' "$f"
-  done
+# Then extras (if any)
+if [ "${#extra[@]}" -gt 0 ]; then
+  printf "\n##### EXTRAS #####\n"
+  git ls-files -z -- "${extra[@]}" \
+  | tr '\0' '\n' \
+  | while IFS= read -r f; do emit "$f"; done
+fi
 
