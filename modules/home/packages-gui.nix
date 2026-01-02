@@ -21,5 +21,6 @@
     vlc
     freetube
 #    citrix_workspace
+    qFlipper
   ];
 }
